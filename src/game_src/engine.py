@@ -85,7 +85,12 @@ class Board():
             return 1
         else:
             return 0
-    
+        
+
+    def check_for_winner(self):
+        # Implement the winning logic here
+        return 0
+
 
 class Deck():
     def __init__(self):
@@ -150,6 +155,13 @@ class Sequense_game():
         else:
             print("ERROR: Player dont have the card", card)
             return 0
+        
+    def check_if_won(self):
+        winner = self.board.check_for_winner()
+        if winner:
+            return 1
+        else:
+            return 0
                 
 
 class Sequense_game_1_player(Sequense_game):
@@ -161,7 +173,9 @@ class Sequense_game_1_player(Sequense_game):
         self.play_card(2, card)
 
     def play_game(self):
-        while(1):
+
+        loop = 1
+        while(loop):
             print(self.board)
             print("")
             print("Choose card to play:")
@@ -173,12 +187,20 @@ class Sequense_game_1_player(Sequense_game):
             try:
                 if self.player1.has_card(self.player1.cards[int(card)-1]):
                     if self.play_card(1, self.player1.cards[int(card)-1]):
+                        if self.check_if_won():
+                            break
                         self.bot_player_2_plays_card()
+                        if self.check_if_won():
+                            break
                     else:
                         print("ERROR: Cant play card.")
                 else:
                     print("\nPlayer 1 hand is empty\n")
             except:
                 print("No matching card")
-    
+
+        print("GAME OVER")
+        print("Player", self.check_if_won(), "won!")
+        
+
         
