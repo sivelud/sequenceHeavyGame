@@ -8,7 +8,8 @@ class Player():
         self.id = id
 
     def add_card(self, card):
-        self.cards.append(card)
+        if card != 0:
+            self.cards.append(card)
 
     def play_card(self, card):
         if card in self.cards:
@@ -28,9 +29,8 @@ class Player():
         if card in self.cards:
             return 1
         else:
-            return 0
-        
-        
+            return 0   
+
 
 class Board():
     def __init__(self):
@@ -112,6 +112,9 @@ class Deck():
         np.random.shuffle(self.deck)
 
     def draw_card_fom_deck(self):
+        if len(self.deck) == 0:
+            print("ERROR: Deck is empty")
+            return 0
         return self.deck.pop()
 
 
@@ -122,6 +125,8 @@ class Sequense_game():
         self.player1 = Player(1)
         self.player2 = Player(2)
         self.player = {1: self.player1, 2: self.player2}
+        self.n_starting_cards = 7
+        self.deal_hands(self.n_starting_cards)
 
     def deal_hands(self,n_cards):
         for i in range(0,n_cards):
@@ -136,6 +141,8 @@ class Sequense_game():
             if self.board.is_free(card):
                 self.board.place_card(card, player)
                 self.player[player].play_card(card)
+                self.player[player].add_card(self.deck.draw_card_fom_deck())
+                print("Player", player, "played", card)
                 return 1
             else:
                 print("ERROR: Cant play card. Already pin in that spot")
@@ -144,3 +151,34 @@ class Sequense_game():
             print("ERROR: Player dont have the card", card)
             return 0
                 
+
+class Sequense_game_1_player(Sequense_game):
+    def __init___(self):
+        super().__init__()
+
+    def bot_player_2_plays_card(self):
+        card = self.player2.cards[0]
+        self.play_card(2, card)
+
+    def play_game(self):
+        while(1):
+            print(self.board)
+            print("")
+            print("Choose card to play:")
+            outstr = ""
+            for i, card in enumerate(self.player1.cards):
+                outstr += f"{i+1}: {card}  "
+            print(outstr)
+            card = input("What nr card do you want to play? ")
+            try:
+                if self.player1.has_card(self.player1.cards[int(card)-1]):
+                    if self.play_card(1, self.player1.cards[int(card)-1]):
+                        self.bot_player_2_plays_card()
+                    else:
+                        print("ERROR: Cant play card.")
+                else:
+                    print("\nPlayer 1 hand is empty\n")
+            except:
+                print("No matching card")
+    
+        
