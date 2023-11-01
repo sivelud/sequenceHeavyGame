@@ -185,8 +185,10 @@ class Sequense_game_1_player(Sequense_game):
 
     def play_then_bot_play(self, player, card):
         out = self.play_card(player, card)
-        if not self.check_if_won():
-            self.bot_player_2_plays_card()
+        # if not self.check_if_won():
+        #     self.bot_player_2_plays_card()
+        # return out
+        self.bot_player_2_plays_card()
         return out
 
 
