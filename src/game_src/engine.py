@@ -10,6 +10,7 @@ class Player():
     def add_card(self, card):
         if card != 0:
             self.cards.append(card)
+        self.cards.sort()
 
     def play_card(self, card):
         if card in self.cards:
