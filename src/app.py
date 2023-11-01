@@ -15,27 +15,29 @@ def index():
     """
     Home page for the game.
     """
-    return render_template('game.html', player_cards=game.player1.cards)
+    return render_template('game.html', player_cards=game.player1.cards, board_str=game.board.__str__())
 
 @app.route('/play_card', methods=['POST'])
 def play_card():
-    print("play_card in app.py")
-
-    card = request.json.get('card')  # Change this line
-    print("card:", card)
+    card = request.json['card']
     player = 1  # Assuming player 1 for singleplayer
-    success = game.play_card(player, card)
+    success = game.play_then_bot_play(player, card)
+    winner = game.check_if_won()
     
     if success:
         # Return new state or any other relevant data
-        return jsonify({
-            'success': True, 
-            'board': game.board.board_dic,
-            'player_cards': game.player1.cards  # Adding this line to return updated cards
-        })
+        updated_cards = game.player1.cards
+        return jsonify({'success': True, 'board_str': game.board.__str__(), 'player_cards': updated_cards})
     else:
         return jsonify({'success': False, 'message': 'Cannot play card.'})
 
+@app.route('/reset_game', methods=['POST'])
+def reset_game_route():
+    try:
+        game.reset_game()
+        return jsonify({'success': True, 'message': 'Game reset successfully'})
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)})
 
 
 # ... other routes or API endpoints ...

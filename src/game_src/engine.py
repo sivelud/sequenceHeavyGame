@@ -90,7 +90,13 @@ class Board():
 
     def check_for_winner(self):
         # Implement the winning logic here
-        return 0
+        if self.board_dic["♦2"] != None:
+            return 1
+        elif self.board_dic["♦3"] != None:
+            return 2
+        else:
+            return 0
+            
 
 
 class Deck():
@@ -134,6 +140,14 @@ class Sequense_game():
         self.n_starting_cards = 7
         self.deal_hands(self.n_starting_cards)
 
+    def reset_game(self):
+        self.board = Board()
+        self.deck = Deck()
+        self.player1 = Player(1)
+        self.player2 = Player(2)
+        self.player = {1: self.player1, 2: self.player2}
+        self.deal_hands(self.n_starting_cards)
+
     def deal_hands(self,n_cards):
         for i in range(0,n_cards):
             self.player1.add_card(self.deck.draw_card_fom_deck())
@@ -158,11 +172,7 @@ class Sequense_game():
             return 0
         
     def check_if_won(self):
-        winner = self.board.check_for_winner()
-        if winner:
-            return 1
-        else:
-            return 0
+        return self.board.check_for_winner()
                 
 
 class Sequense_game_1_player(Sequense_game):
@@ -172,6 +182,13 @@ class Sequense_game_1_player(Sequense_game):
     def bot_player_2_plays_card(self):
         card = self.player2.cards[0]
         self.play_card(2, card)
+
+    def play_then_bot_play(self, player, card):
+        out = self.play_card(player, card)
+        if not self.check_if_won():
+            self.bot_player_2_plays_card()
+        return out
+
 
     def play_game(self):
 
