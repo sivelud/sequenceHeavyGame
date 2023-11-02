@@ -17,29 +17,39 @@
         <section class="player-cards">
             <button id="reset-btn">Reset Game</button>
             <h2>Your Cards</h2>
-            <ul id="card-list">
+            <div class="card-grid">
                 {% for card in player_cards %}
-                <li>
-                    {{ card }}
+                <div class="card-wrapper">
+                    <img src="{{ url_for('static', filename='cards_png/' + CARD_MAP[card] + '.png') }}" alt="{{ card }}" class="card">
                     <button data-card="{{ card }}" class="play-card-btn">Play</button>
-                </li>
+                </div>
                 {% endfor %}
-            </ul>
+            </div>
         </section>
         
-        <section class="game-board">
-            <h2>Game Board</h2>
-            <pre>{{ board_str }}</pre>
-        </section>
         
-
+        <div class="card-grid">
+            {% set counter = 0 %}
+            {% for card, value in board.items() %}
+                {% if counter % 6 == 0 %}
+                <div class="card-row">
+                {% endif %}
+        
+                <img src="{{ url_for('static', filename='cards_png/' + CARD_MAP[card] + '.png') }}" alt="{{ card }}">
+        
+                {% if counter % 6 == 5 %}
+                </div> <!-- Close card-row -->
+                {% endif %}
+        
+                {% set counter = counter + 1 %}
+            {% endfor %}
+        </div>
+        
 
         <!-- <section class="game-log">
-            <h2>Game Log</h2> -->
-
-            <!-- Your game actions log here -->
-
-        <!-- </section> -->
+            <h2>Game Log</h2>
+            Your game actions log here
+        </section> -->
         
     </main>
 

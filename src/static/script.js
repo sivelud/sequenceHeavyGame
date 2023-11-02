@@ -1,18 +1,21 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const gameBoardElement = document.querySelector('.game-board pre');  // Select the <pre> tag inside .game-board
+    const gameBoardElement = document.querySelector('.game-board pre');
     const playerCardList = document.getElementById('card-list');
+    const resetButton = document.getElementById('reset-btn');
 
+    // Function to update the game board
     function updateGameBoard(board_str) {
         gameBoardElement.textContent = board_str;
     }
 
+    // Function to update the player's cards list
     function updatePlayerCards(cards) {
         playerCardList.innerHTML = ''; // Clear current cards
-        
+
         cards.forEach(card => {
             const li = document.createElement('li');
             li.textContent = card;
-            
+
             const button = document.createElement('button');
             button.textContent = 'Play';
             button.className = 'play-card-btn';
@@ -20,12 +23,13 @@ document.addEventListener("DOMContentLoaded", function() {
             button.onclick = function() {
                 playCard(card);
             };
-            
+
             li.appendChild(button);
             playerCardList.appendChild(li);
         });
     }
 
+    // Function to play a card
     function playCard(card) {
         fetch('/play_card', {
             method: 'POST',
@@ -48,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    // Function to reset the game
     function resetGame() {
         fetch('/reset_game', {
             method: 'POST'
@@ -66,9 +71,16 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Attach event listener for the reset button
-    document.getElementById('reset-btn').addEventListener('click', resetGame);
+    resetButton.addEventListener('click', resetGame);
 
-    // Attach event listeners to play card buttons
+    // Event listeners for card images
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', function() {
+            console.log(this.alt); // log the alt text of the card when clicked
+        });
+    });
+
+    // Event listeners for 'play card' buttons (initial buttons)
     const cardButtons = document.querySelectorAll('.play-card-btn');
     cardButtons.forEach(button => {
         button.addEventListener('click', function() {
