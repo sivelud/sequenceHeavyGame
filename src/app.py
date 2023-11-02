@@ -3,6 +3,7 @@
 
 from flask import Flask, render_template, request, jsonify
 from game_src.engine import Sequense_game_1_player  # Import your game logic class
+import copy
 
 import os
 print("PATH:")
@@ -87,10 +88,22 @@ CARD_MAP = {
 @app.route('/')
 def index():
     # Convert the game board and player cards for rendering
-    board_for_display = {k: CARD_MAP[v] for k, v in game.board_dic.items()}
-    player_cards_for_display = [CARD_MAP[card] for card in game.player1.cards]
+    # board_for_display = game.board.board_dic.keys()
 
-    return render_template('your_template_name.html', board=board_for_display, player_cards=player_cards_for_display)
+    # player_cards_for_display = game.player1.cards
+
+    board_keys = list(game.board.board_dic.keys())
+
+    player_card_keys = list(game.player1.cards)
+
+    return render_template('game.html', board=board_keys, player_cards=player_card_keys,CARD_MAP=CARD_MAP)
+
+
+    # return render_template('game.html', 
+    #                        board=board_for_display, 
+    #                        player_cards=player_cards_for_display, 
+    #                        CARD_MAP=CARD_MAP)
+
 
 @app.route('/play_card', methods=['POST'])
 def play_card():
