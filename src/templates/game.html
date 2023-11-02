@@ -29,8 +29,16 @@
         
         <section class="game-board">
             <h2>Game Board</h2>
-            <pre>{{ board_str }}</pre>
+            <div class="card-grid">
+                {% for card_key in board_keys %}
+                <div class="card-wrapper">
+                    <img src="{{ url_for('static', filename='cards_png/' + CARD_MAP[card_key] + '.png') }}" alt="{{ card_key }}" class="card">
+                    <button data-card="{{ card_key }}" class="play-card-btn">Play</button>
+                </div>
+                {% endfor %}
+            </div>
         </section>
+        
         
 
 
