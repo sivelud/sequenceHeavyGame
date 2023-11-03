@@ -12,6 +12,32 @@
 }
 
 
+.clickCardContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 5px;
+}
+
+.clickImage {
+    width: 100%;
+    max-width: 100px;
+    height: auto; 
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover effects */
+}
+
+.clickImage:hover {
+    transform: scale(1.1); /* Scales the card slightly when hovered */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Adds a shadow to create a lifted effect */
+}
+
+
+
+
+
+
+
+
 .yellow-dot {
     width: 20px;
     height: 20px;

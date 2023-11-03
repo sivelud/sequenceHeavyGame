@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const playerCardList = document.getElementById('card-list');
+    console.log("Script loaded!");
+    
     const cardGridElement = document.querySelector('.card-grid');
 
     function updateGameBoard(boardDots) {
@@ -20,26 +21,29 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function updatePlayerCards(cards) {
-        playerCardList.innerHTML = ''; // Clear current cards
-        
-        cards.forEach(card => {
-            const li = document.createElement('li');
-            li.textContent = card;
+        const clickCardContainers = document.querySelectorAll('.clickCardContainer');
+        clickCardContainers.forEach((container, index) => {
+            const card = cards[index];
+            const img = document.createElement('img');
+            img.src = "{{ url_for('static', filename='cards_png/' + CARD_MAP[card] + '.png') }}";
+            img.alt = card;
+            img.id = "clickImage";
+            img.className = "clickImage";
             
-            const button = document.createElement('button');
-            button.textContent = 'Play';
-            button.className = 'play-card-btn';
-            button.dataset.card = card;
-            button.onclick = function() {
+            // Clear current image and append new one
+            container.innerHTML = '';
+            container.appendChild(img);
+            
+            img.addEventListener('click', function() {
+                console.log("Card clicked:", card);
                 playCard(card);
-            };
-            
-            li.appendChild(button);
-            playerCardList.appendChild(li);
+            });
         });
     }
 
     function playCard(card) {
+        console.log("playCard function called with:", card);
+        
         fetch('/play_card', {
             method: 'POST',
             headers: {
@@ -55,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 .then(resp => resp.json())
                 .then(boardDots => {
                     updateGameBoard(boardDots);
+                    console.log("updating player cards", data.player_cards)
                     updatePlayerCards(data.player_cards);
                 });
             } else {
@@ -86,11 +91,12 @@ document.addEventListener("DOMContentLoaded", function() {
     // Attach event listener for the reset button
     document.getElementById('reset-btn').addEventListener('click', resetGame);
 
-    // Attach event listeners to play card buttons
-    const cardButtons = document.querySelectorAll('.play-card-btn');
-    cardButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const card = button.getAttribute('data-card');
+    // Initially set up the click listeners on the cards
+    const cardImages = document.querySelectorAll('.clickImage');
+    cardImages.forEach(img => {
+        const card = img.alt;
+        img.addEventListener('click', function() {
+            console.log("Card clicked:", card);
             playCard(card);
         });
     });

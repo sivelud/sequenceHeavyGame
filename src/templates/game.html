@@ -15,15 +15,14 @@
 
     <main>
         <section class="player-cards">
-            <button id="reset-btn">Reset Game</button>
             <h2>Your Cards</h2>
             <ul id="card-list">
-                {% for card in player_cards %}
-                <li>
-                    {{ card }}
-                    <button data-card="{{ card }}" class="play-card-btn">Play</button>
-                </li>
-                {% endfor %}
+                <div class="clickCardContainer"> <!-- One Card Container for all cards -->
+                    {% for card in player_cards %}
+                        <img src="{{ url_for('static', filename='cards_png/' + CARD_MAP[card] + '.png') }}" alt="{{ card }}" class="clickImage">
+                    {% endfor %}
+                </div>
+                
             </ul>
         </section>
 
@@ -43,21 +42,25 @@
                     </div> <!-- End of Card Container -->
                 {% endfor %}
             </div>
+            
+        </section>
+
+        
+        
+        
+        
+        
+
+
+        <section class="game-log">
+            <h2>Other:</h2>
+            <button id="reset-btn">Reset Game</button>
+
+
         </section>
         
-        
-        
-        
-
-
-        <!-- <section class="game-log">
-            <h2>Game Log</h2> -->
-
-            <!-- Your game actions log here -->
-
-        <!-- </section> -->
-        
     </main>
+    
 
     <!-- <footer>
         <p>Travel sequence</p>

@@ -76,7 +76,7 @@ def get_current_board():
             dot_list.append(str(0))
         else:
             dot_list.append(str(game.board.board_dic[elem]))
-    return jsonify(dot_list)
+    return jsonify(dot_list, CARD_MAP)
 
 
 @app.route('/reset_game', methods=['POST'])
