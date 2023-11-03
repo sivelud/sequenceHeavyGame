@@ -1,0 +1,55 @@
+.card-grid {
+    width: 50%;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 5px; /* Optional: space between the cards */
+}
+
+.card-grid img {
+    width: 100%; 
+    max-width: 100px; /* Adjust based on your desired card width */
+    height: auto; 
+}
+
+
+.yellow-dot {
+    width: 20px;
+    height: 20px;
+    background-color: yellow;
+    border-radius: 50%; /* make it a circle */
+    position: absolute;
+    /* for centering on the card */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* ensures the center of the dot aligns with the center of the card */
+    /* If you want it on the top right corner for example:
+    top: 10px;
+    right: 10px;
+    transform: none; 
+    */
+}
+
+.red-dot {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%; /* make it a circle */
+    position: absolute;
+    /* for centering on the card */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* ensures the center of the dot aligns with the center of the card */
+    /* If you want it on the top right corner for example:
+    top: 10px;
+    right: 10px;
+    transform: none; 
+    */
+}
+
+
+.card-container {
+    display: flex;
+    align-items: center; /* center vertically */
+    justify-content: center; /* center horizontally */
+    position: relative; /* so that the dot can be positioned within the container */
+}

@@ -26,18 +26,26 @@
                 {% endfor %}
             </ul>
         </section>
-        
+
         <section class="game-board">
             <h2>Game Board</h2>
             <div class="card-grid">
-                {% for card_key in board_keys %}
-                <div class="card-wrapper">
-                    <img src="{{ url_for('static', filename='cards_png/' + CARD_MAP[card_key] + '.png') }}" alt="{{ card_key }}" class="card">
-                    <button data-card="{{ card_key }}" class="play-card-btn">Play</button>
-                </div>
+                {% for card, dot_value in zipped_cards_and_dots %}
+                    <div class="card-container"> <!-- Card Container -->
+                        <img src="{{ url_for('static', filename='cards_png/' + CARD_MAP[card] + '.png') }}" alt="{{ card }}">
+                        
+                        {% if dot_value == '1' %}
+                            <div class="yellow-dot"></div> <!-- Yellow Dot -->
+                        {% elif dot_value == '2' %}
+                            <div class="red-dot"></div> <!-- Red Dot -->
+                        {% endif %}
+                        
+                    </div> <!-- End of Card Container -->
                 {% endfor %}
             </div>
         </section>
+        
+        
         
         
 
