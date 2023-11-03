@@ -89,15 +89,69 @@ class Board():
         
 
     def check_for_winner(self):
-        # Implement the winning logic here
-        if self.board_dic["♦2"] != None:
-            return 1
-        elif self.board_dic["♦3"] != None:
-            return 2
-        else:
-            return 0
-            
+        values = list(self.board_dic.values())
 
+        arr_grr = [
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0],
+        ]
+        c = 0
+        for i1 in range(0,6):
+            for j1 in range(0,8):
+                if values[c]:
+                    arr_grr[i1][j1] = values[c]
+                c += 1
+#-----------------------------------------------------------------------
+
+        # TODO:
+
+        # From top to bottom right \
+        # x = 0
+        # hight = 6
+        # for i in range(0,8):
+
+
+
+        # From top to bottom left /
+        # # Horizontal chekc
+        # for i in range(0,6):
+        #     count = 0
+        #     player = 0
+        #     for j in range(0,8):
+        #         if player == arr_grr[i][j] and player != 0:
+        #             count += 1
+        #             if count == 4:
+        #                 print("WINNER IS:", player)
+        #                 return player
+        #         else:
+        #             player = arr_grr[i][j]
+        #             count = 1
+
+        # Vertical check
+        # for i in range(0,8):
+        #     count = 0
+        #     player = 0
+        #     for j in range(0,6):
+        #         if player == arr_grr[j][i] and player != 0:
+        #             count += 1
+        #             if count == 4:
+        #                 print("WINNER IS:", player)
+        #                 return player
+        #         else:
+        #             player = arr_grr[j][i]
+        #             count = 1
+
+
+
+
+                    
+
+        return 0 # No winner
+            
 
 class Deck():
     def __init__(self):
@@ -172,7 +226,13 @@ class Sequense_game():
             return 0
         
     def check_if_won(self):
-        return self.board.check_for_winner()
+        winner = self.board.check_for_winner()
+
+        if winner:
+            self.player1.cards = []
+            self.player2.cards = []
+
+        return winner
                 
 
 class Sequense_game_1_player(Sequense_game):
@@ -180,8 +240,9 @@ class Sequense_game_1_player(Sequense_game):
         super().__init__()
 
     def bot_player_2_plays_card(self):
-        card = self.player2.cards[0]
-        self.play_card(2, card)
+        if len(self.player2.cards) > 0:
+            card = self.player2.cards[0]
+            self.play_card(2, card)
 
     def play_then_bot_play(self, player, card):
         out = self.play_card(player, card)

@@ -1,3 +1,8 @@
+body {
+    background-color: greenyellow;
+
+}
+
 .card-grid {
     width: 50%;
     display: grid;
@@ -32,12 +37,6 @@
 }
 
 
-
-
-
-
-
-
 .yellow-dot {
     width: 20px;
     height: 20px;
@@ -48,6 +47,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); /* ensures the center of the dot aligns with the center of the card */
+    box-shadow: 0 0 15px rgb(0, 0, 0); /* Adds a shadow to create a lifted effect */
     /* If you want it on the top right corner for example:
     top: 10px;
     right: 10px;
@@ -65,6 +65,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); /* ensures the center of the dot aligns with the center of the card */
+    box-shadow: 0 0 15px rgb(0, 0, 0); /* Adds a shadow to create a lifted effect */
     /* If you want it on the top right corner for example:
     top: 10px;
     right: 10px;
