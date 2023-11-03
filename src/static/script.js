@@ -20,27 +20,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    function updatePlayerCards(cards) {
-        const clickCardContainers = document.querySelectorAll('.clickCardContainer');
-        clickCardContainers.forEach((container, index) => {
-            const card = cards[index];
-            const img = document.createElement('img');
-            img.src = "{{ url_for('static', filename='cards_png/' + CARD_MAP[card] + '.png') }}";
-            img.alt = card;
-            img.id = "clickImage";
-            img.className = "clickImage";
-            
-            // Clear current image and append new one
-            container.innerHTML = '';
-            container.appendChild(img);
-            
-            img.addEventListener('click', function() {
-                console.log("Card clicked:", card);
-                playCard(card);
-            });
-        });
-    }
-
     function playCard(card) {
         console.log("playCard function called with:", card);
         
@@ -60,7 +39,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 .then(boardDots => {
                     updateGameBoard(boardDots);
                     console.log("updating player cards", data.player_cards)
-                    updatePlayerCards(data.player_cards);
+                    location.reload()
+
                 });
             } else {
                 console.error(data.message);
