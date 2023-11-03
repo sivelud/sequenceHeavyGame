@@ -106,49 +106,128 @@ class Board():
                     arr_grr[i1][j1] = values[c]
                 c += 1
 #-----------------------------------------------------------------------
+# Actual checking:
 
-        # TODO:
-
-        # From top to bottom right \
-        # x = 0
-        # hight = 6
-        # for i in range(0,8):
-
-
-
-        # From top to bottom left /
         # # Horizontal chekc
-        # for i in range(0,6):
-        #     count = 0
-        #     player = 0
-        #     for j in range(0,8):
-        #         if player == arr_grr[i][j] and player != 0:
-        #             count += 1
-        #             if count == 4:
-        #                 print("WINNER IS:", player)
-        #                 return player
-        #         else:
-        #             player = arr_grr[i][j]
-        #             count = 1
+        for i in range(0,6):
+            count = 0
+            player = 0
+            for j in range(0,8):
+                if player == arr_grr[i][j] and player != 0:
+                    count += 1
+                    if count == 4:
+                        print("WINNER IS:", player)
+                        return player
+                else:
+                    player = arr_grr[i][j]
+                    count = 1
 
         # Vertical check
-        # for i in range(0,8):
-        #     count = 0
-        #     player = 0
-        #     for j in range(0,6):
-        #         if player == arr_grr[j][i] and player != 0:
-        #             count += 1
-        #             if count == 4:
-        #                 print("WINNER IS:", player)
-        #                 return player
-        #         else:
-        #             player = arr_grr[j][i]
-        #             count = 1
+        for i in range(0,8):
+            count = 0
+            player = 0
+            for j in range(0,6):
+                if player == arr_grr[j][i] and player != 0:
+                    count += 1
+                    if count == 4:
+                        print("WINNER IS:", player)
+                        return player
+                else:
+                    player = arr_grr[j][i]
+                    count = 1
 
 
+        # From top to bottom right \ 
+        for x_outer in range(0,8):
+            x = x_outer
+            count = 0
+            player = 0
+            for y in range(0,6):
+                print("X=",x,"Y=",y)
+                try:
+                    val = arr_grr[y][x]
+                    if player == val and player != 0:
+                        count += 1
+                        if count == 4:
+                            print("WINNER IS:", player)
+                            return player
+                    else:
+                        player = val
+                        count = 1
+                except IndexError:
+                    player = 0
+                    count = 0
+                x += 1
 
 
-                    
+        # From top to bottom left / 
+        for x_outer in range(0,8):
+            x = x_outer
+            count = 0
+            player = 0
+            for y_outer in range(0,6):
+                y = 6-y_outer
+                print("X=",x,"Y=",y)
+                try:
+                    val = arr_grr[y][x]
+                    if player == val and player != 0:
+                        count += 1
+                        if count == 4:
+                            print("WINNER IS:", player)
+                            return player
+                    else:
+                        player = val
+                        count = 1
+                except IndexError:
+                    player = 0
+                    count = 0
+                x += 1
+
+        # # From bottom to top /
+        for x_outer in range(0,8):
+            x = x_outer
+            count = 0
+            player = 0
+            for y_outer in range(0,6):
+                y = 6-y_outer
+                print("X=",x,"Y=",y)
+                try:
+                    val = arr_grr[y][x]
+                    if player == val and player != 0:
+                        count += 1
+                        if count == 4:
+                            print("WINNER IS:", player)
+                            return player
+                    else:
+                        player = val
+                        count = 1
+                except IndexError:
+                    player = 0
+                    count = 0
+                x += 1
+
+        # From bottom to top \
+        for x_outer in range(0,8):
+            x = 8-x_outer
+            count = 0
+            player = 0
+            for y_outer in range(0,6):
+                y = 6-y_outer
+                print("X=",x,"Y=",y)
+                try:
+                    val = arr_grr[y][x]
+                    if player == val and player != 0:
+                        count += 1
+                        if count == 4:
+                            print("WINNER IS:", player)
+                            return player
+                    else:
+                        player = val
+                        count = 1
+                except IndexError:
+                    player = 0
+                    count = 0
+                x += 1
 
         return 0 # No winner
             
