@@ -42,7 +42,9 @@ def index():
             dot_list.append(str(game.board.board_dic[elem]))
 
     zipped_cards_and_dots = list(zip(board_cards_keys, dot_list))
-    return render_template('game.html', player_cards=game.player1.cards, board_str=game.board.__str__(), zipped_cards_and_dots=zipped_cards_and_dots, CARD_MAP=CARD_MAP)
+    winner = str(game.check_if_won())
+
+    return render_template('game.html', player_cards=game.player1.cards, board_str=game.board.__str__(), zipped_cards_and_dots=zipped_cards_and_dots, CARD_MAP=CARD_MAP, winner=winner)
 
 
 @app.route('/play_card', methods=['POST'])

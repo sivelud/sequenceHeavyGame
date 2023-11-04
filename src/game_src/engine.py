@@ -181,7 +181,7 @@ class Board():
                 except IndexError:
                     player = 0
                     count = 0
-                x += 1
+                x -= 1
 
         # # From bottom to top /
         for x_outer in range(0,8):
@@ -227,7 +227,7 @@ class Board():
                 except IndexError:
                     player = 0
                     count = 0
-                x += 1
+                x -= 1
 
         return 0 # No winner
             
