@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequence Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <header>
+        <h1>Travel Sequence</h1>
+    </header>
+
+    <main>
+        <section class="player-cards">
+            <h2>Your Cards</h2>
+            <ul id="card-list">
+                <div class="clickCardContainer"> <!-- One Card Container for all cards -->
+                    {% for card in player_cards %}
+                        <img src="{{ url_for('static', filename='cards_png/' + CARD_MAP[card] + '.png') }}" alt="{{ card }}" class="clickImage">
+                    {% endfor %}
+                </div>
+                {% if winner == '1' %}
+                    <h2>Player 1 won!</h2>
+                {% elif winner == '2' %}
+                    <h2>Player 2 won!</h2>
+                {% endif %}
+                
+            </ul>
+        </section>
+
+        <section class="game-board">
+            <h2>Game Board</h2>
+            <div class="card-grid">
+                {% for card, dot_value in zipped_cards_and_dots %}
+                    <div class="card-container"> <!-- Card Container -->
+                        <img src="{{ url_for('static', filename='cards_png/' + CARD_MAP[card] + '.png') }}" alt="{{ card }}">
+                        
+                        {% if dot_value == '1' %}
+                            <div class="yellow-dot"></div> <!-- Yellow Dot -->
+                        {% elif dot_value == '2' %}
+                            <div class="red-dot"></div> <!-- Red Dot -->
+                        {% endif %}
+                        
+                    </div> <!-- End of Card Container -->
+                {% endfor %}
+            </div>
+            
+        </section>
+
+        <section class="game-log">
+            <h2>Other:</h2>
+            <button id="reset-btn">Reset Game</button>
+
+
+        </section>
+        
+    </main>
+    
+
+    <!-- <footer>
+        <p>Travel sequence</p>
+    </footer> -->
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

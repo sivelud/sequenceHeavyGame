@@ -1,0 +1,82 @@
+body {
+    background-color: greenyellow;
+
+}
+
+.card-grid {
+    width: 50%;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 5px; /* Optional: space between the cards */
+}
+
+.card-grid img {
+    width: 100%; 
+    max-width: 100px; /* Adjust based on your desired card width */
+    height: auto; 
+}
+
+
+.clickCardContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 5px;
+}
+
+.clickImage {
+    width: 100%;
+    max-width: 100px;
+    height: auto; 
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover effects */
+}
+
+.clickImage:hover {
+    transform: scale(1.1); /* Scales the card slightly when hovered */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Adds a shadow to create a lifted effect */
+}
+
+
+.yellow-dot {
+    width: 40px;
+    height: 40px;
+    background-color: yellow;
+    border-radius: 50%; /* make it a circle */
+    position: absolute;
+    /* for centering on the card */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* ensures the center of the dot aligns with the center of the card */
+    box-shadow: 0 0 15px rgb(0, 0, 0); /* Adds a shadow to create a lifted effect */
+    /* If you want it on the top right corner for example:
+    top: 10px;
+    right: 10px;
+    transform: none; 
+    */
+}
+
+.red-dot {
+    width: 40px;
+    height: 40px;
+    background-color: blue;
+    border-radius: 50%; /* make it a circle */
+    position: absolute;
+    /* for centering on the card */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* ensures the center of the dot aligns with the center of the card */
+    box-shadow: 0 0 15px rgb(0, 0, 0); /* Adds a shadow to create a lifted effect */
+    /* If you want it on the top right corner for example:
+    top: 10px;
+    right: 10px;
+    transform: none; 
+    */
+}
+
+
+.card-container {
+    display: flex;
+    align-items: center; /* center vertically */
+    justify-content: center; /* center horizontally */
+    position: relative; /* so that the dot can be positioned within the container */
+}
