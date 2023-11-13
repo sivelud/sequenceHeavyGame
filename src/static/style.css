@@ -38,8 +38,8 @@ body {
 
 
 .yellow-dot {
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     background-color: yellow;
     border-radius: 50%; /* make it a circle */
     position: absolute;
@@ -56,9 +56,9 @@ body {
 }
 
 .red-dot {
-    width: 20px;
-    height: 20px;
-    background-color: red;
+    width: 40px;
+    height: 40px;
+    background-color: blue;
     border-radius: 50%; /* make it a circle */
     position: absolute;
     /* for centering on the card */
